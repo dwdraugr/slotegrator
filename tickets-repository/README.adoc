@@ -5,7 +5,7 @@
 
 Есть класс, который позволяет работать с билетами, находящимися
 в БД:
-[source,html+php]
+[source,php]
 ----
 class TicketRepository
 {
@@ -26,4 +26,47 @@ class TicketRepository
 
 == Описание решения
 
+Решение в данном случае выглядит как создание интерфейса плагина для репозитория, с набором
+необходимых для нас операций. В дальнейшем наш репозиторий будет содержать все необходимые
+реализации плагина. 
 
+[source,php]
+// ResourceInterface.php
+----
+interface ResourcePluginInterface
+{
+    public function load($ticketID);
+    public function save($ticket){/*...*/};
+    public function update($ticket){/*...*/};
+    public function delete($ticket){/*...*/};
+}
+
+// TicketRepository.php
+class TicketRepository
+{
+    protected function getPlugins()
+    {
+        return [
+            new DbResourcePlugin(),
+            new ApiResourcePlugin(),
+        ];
+    }
+
+    public function load($ticketID)
+    {
+        $result = null;
+        foreach ($this->getPlugins() as $plugin) {
+            $result = $plugin->load($ticketID);
+            if ($result !== null) {
+                break;
+            }
+        }
+
+        return $result
+    }
+
+    public function save($ticket){/*...*/};
+    public function update($ticket){/*...*/};
+    public function delete($ticket){/*...*/};
+}
+----
