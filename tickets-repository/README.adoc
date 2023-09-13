@@ -1,0 +1,29 @@
+= Репозиторий билетов
+:source-highlighter: rouge
+
+== Текст задания
+
+Есть класс, который позволяет работать с билетами, находящимися
+в БД:
+[source,html+php]
+----
+class TicketRepository
+{
+    public function load($ticketID)
+    {
+        return Ticket::find()->where(['id' => $ticketId])->one();
+    }
+    public function save($ticket){/*...*/}
+    public function update($ticket){/*...*/}
+    public function delete($ticket){/*...*/}
+}
+----
+Стоит задача реализовать возможность работы с билетами
+которые хранятся на другом сервере (по API).
+Требуется описать структуру методов и классов, с помощью
+которых можно будет загружать билеты как из БД, так и из
+другого сервера (по API).
+
+== Описание решения
+
+
