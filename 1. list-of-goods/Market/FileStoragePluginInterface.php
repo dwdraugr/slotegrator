@@ -11,7 +11,7 @@ interface FileStoragePluginInterface
      * @return string|null
      */
     public function getUrl($fileName): ?string;
-    
+
     /**
      * Returns whether file exists or not.
      *
@@ -19,7 +19,7 @@ interface FileStoragePluginInterface
      * @return bool
      */
     public function fileExists(string $fileName): bool;
-    
+
     /**
      * Deletes a file in the filesystem and throws an exception in case of errors.
      *
@@ -27,7 +27,7 @@ interface FileStoragePluginInterface
      * @return void
      */
     public function deleteFile(string $fileName): void;
-    
+
     /**
      * Saves a file in the filesystem and throws an exception in case of errors.
      *

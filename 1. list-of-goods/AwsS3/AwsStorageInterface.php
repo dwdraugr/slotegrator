@@ -1,4 +1,5 @@
 <?php
+
 namespace AwsS3\Client;
 
 use AwsS3\AwsUrlInterface;
