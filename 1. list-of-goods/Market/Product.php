@@ -55,4 +55,23 @@ class Product
         return true;
     }
     /*...*/
+
+    /**
+     * @param string[] $imagesFileNames
+     * @return string[]
+     */
+    public function getImagesUrls(array $imagesFileNames): array
+    {
+        $imagesUrls = [];
+        $existedImages = array_filter(
+            $imagesFileNames,
+            fn($el) => $this->storage->fileExists($el) === true
+        );
+
+        foreach ($existedImages as $img) {
+            $imagesUrls[] = $this->storage->getUrl($img);
+        }
+
+        return $imagesUrls;
+    }
 }
